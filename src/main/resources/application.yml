@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    dynamic:
+      datasource:
+        master:
+          username: root
+          password: zaq1@WSX
+          url: jdbc:mysql://192.168.2.135:3306/loong?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+          driver-class-name: com.mysql.jdbc.Driver
+        slave:
+          username: root
+          password: zaq1@WSX
+          url: jdbc:mysql://192.168.2.135:3306/loong_jcf?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+          driver-class-name: com.mysql.jdbc.Driver
+      strict: false
+      primary: master
+
+
+mybatis:
+  type-aliases-package: com.standbyme.datasourcedynamic.mapper.*
+  configuration:
+    cache-enabled: false
+

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.standbyme.datasourcedynamic.mapper.TestMapper">
+    <resultMap id="BaseResultMap" type="com.standbyme.datasourcedynamic.domain.CalcTask">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="taskname" property="taskname" jdbcType="VARCHAR"/>
+        <result column="siteid" property="siteid" jdbcType="BIGINT"/>
+        <result column="site_name" property="siteName" jdbcType="VARCHAR"/>
+        <result column="mpointId" property="mpointid" jdbcType="BIGINT"/>
+        <result column="mpoint_name" property="mpointName" jdbcType="VARCHAR"/>
+        <result column="startDT" property="startdt" jdbcType="TIMESTAMP"/>
+        <result column="endDT" property="enddt" jdbcType="TIMESTAMP"/>
+        <result column="cycle_start" property="cycleStart" jdbcType="VARCHAR"/>
+        <result column="dataDT" property="datadt" jdbcType="TIMESTAMP"/>
+        <result column="finishDT" property="finishdt" jdbcType="TIMESTAMP"/>
+        <result column="cycle" property="cycle" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
+        <result column="formulaId" property="formulaid" jdbcType="BIGINT"/>
+        <result column="expression" property="expression" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="excute_info" property="excuteInfo" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime"
+                jdbcType="TIMESTAMP"/>
+        <result column="create_userid" property="createUserid"
+                jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime"
+                jdbcType="TIMESTAMP"/>
+        <result column="update_userid" property="updateUserid"
+                jdbcType="BIGINT"/>
+        <result column="remarks" property="remarks" jdbcType="VARCHAR"/>
+        <result column="point" property="point" jdbcType="VARCHAR"/>
+        <result column="ftype" property="ftype" jdbcType="VARCHAR"/>
+        <result column="shiftType" property="shiftType" jdbcType="BIGINT"/>
+        <result column="cycle_end" property="cycleEnd" javaType="DATE"/>
+        <result column="initial_value" property="initialValue" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, taskname, siteid, mpointId, startDT, endDT,dataDT,finishDT,cycle_start, cycle, formulaId, status, excute_info,cycle_end,
+    create_time, create_userid, update_time, update_userid, remarks,shiftType
+    </sql>
+    <insert id="insertCalcTask" parameterType="com.standbyme.datasourcedynamic.domain.CalcTask">
+        insert into t_calc_task (taskname, siteid,
+        mpointId, startDT,
+        endDT,cycle_start,
+        cycle, formulaId, status,
+        excute_info, create_time, remarks,shiftType,create_userid,update_time,update_userid)
+        values (#{taskname,jdbcType=VARCHAR},
+        #{siteid,jdbcType=BIGINT},
+        #{mpointid,jdbcType=BIGINT},
+        #{startdt,jdbcType=TIMESTAMP},
+        #{enddt,jdbcType=TIMESTAMP},#{cycleStart,jdbcType=VARCHAR},
+        #{cycle,jdbcType=BIGINT}, #{formulaid,jdbcType=BIGINT},
+        #{status,jdbcType=VARCHAR},
+        #{excuteInfo,jdbcType=VARCHAR},now(),
+        #{remarks,jdbcType=VARCHAR},
+        #{shiftType,jdbcType=BIGINT},#{createUserid},#{updateTime},#{updateUserid})
+    </insert>
+
+    <select id="getTaskById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_calc_task where id = #{taskId}
+    </select>
+</mapper>
