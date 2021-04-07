@@ -1,6 +1,7 @@
 package com.standbyme.datasourcedynamic.controller;
 
 import com.standbyme.datasourcedynamic.service.TestService;
+import org.influxdb.InfluxDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +16,13 @@ public class TestController {
     @Autowired
     TestService testService;
 
+    @Autowired
+    InfluxDB influxDB;
+
     @GetMapping("test")
     @ResponseBody
     public String test() {
-        return "hello Datasouce-Dynamic !!";
+        return influxDB.version();
     }
 
     @GetMapping("calctask")
@@ -31,7 +35,7 @@ public class TestController {
     @GetMapping("jcf")
     @ResponseBody
     public String getCalcTaskByIdJcf(@RequestParam("id") Integer taskId) {
-        String taskName = testService.getCalcTaskByIdJcf(taskId);
+        String taskName = testService.getCalcTaskByIdJcf(taskId,"slave");
         return taskName;
     }
 }

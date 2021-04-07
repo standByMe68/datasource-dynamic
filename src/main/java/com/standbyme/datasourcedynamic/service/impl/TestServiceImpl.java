@@ -1,6 +1,7 @@
 package com.standbyme.datasourcedynamic.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.standbyme.datasourcedynamic.config.annotation.TestAnno;
 import com.standbyme.datasourcedynamic.domain.CalcTask;
 import com.standbyme.datasourcedynamic.mapper.TestMapper;
 import com.standbyme.datasourcedynamic.service.TestService;
@@ -26,8 +27,11 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    @DS("slave")
-    public String getCalcTaskByIdJcf(Integer taskId) {
+    @DS("#datasourceName")
+    @TestAnno(test = "value")
+    public String getCalcTaskByIdJcf(Integer taskId,String datasourceName) {
+
+        System.out.println("执行AOP测试:"+taskId);
         CalcTask calcTask = new CalcTask();
         calcTask.setCreateTime(new Date());
         calcTask.setTaskname("测试1");
@@ -47,8 +51,11 @@ public class TestServiceImpl implements TestService {
         calcTask.setExcuteInfo("2123");
         calcTask.setUpdateUserid(123L);
         Integer integer = testMapper.insertCalcTask(calcTask);
-        System.out.println(1/0);
+//      System.out.println(1 / 0);
         CalcTask taskById = testMapper.getTaskById(taskId);
+        if (taskById == null) {
+            return 0+"";
+        }
         return taskById.getTaskname();
     }
 

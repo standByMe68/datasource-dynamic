@@ -1,7 +1,10 @@
 package com.standbyme.datasourcedynamic.domain;
 
+import com.standbyme.datasourcedynamic.config.annotation.TestAnno;
+
 import java.util.Date;
 
+@TestAnno(test = "123")
 public class CalcDate {
     private Date start;
 

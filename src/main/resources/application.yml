@@ -17,10 +17,26 @@ spring:
           driver-class-name: com.mysql.jdbc.Driver
       strict: false
       primary: master
+  jpa:
+    show-sql: true
+  influx:
+    url: http://192.168.2.136:8086
+    user: root
+    password: root
 
 
 mybatis:
   type-aliases-package: com.standbyme.datasourcedynamic.mapper.*
   configuration:
     cache-enabled: false
+
+application:
+  influx:
+    url: http://192.168.2.136:8086
+    user: root
+    password: root
+    database: demo
+    retention-policy:
+
+
 

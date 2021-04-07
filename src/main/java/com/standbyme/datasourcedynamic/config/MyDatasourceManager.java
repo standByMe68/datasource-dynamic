@@ -23,12 +23,9 @@ public class MyDatasourceManager extends DataSourceTransactionManagerAutoConfigu
     @Autowired
     private DataSource dataSource;
 
-    @Bean("TransactionManager")
+    @Bean("transactionManager")
     public DataSourceTransactionManager getDataSourceTransactionManager() {
         log.info(" init Datasource start");
         return new DataSourceTransactionManager(dataSource);
     }
-
-
-
 }
